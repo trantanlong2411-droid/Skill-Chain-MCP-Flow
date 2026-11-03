@@ -5,6 +5,7 @@ Verified 03 November 2026, with actual hosted **Pharos Chain MCP** tool requests
 - [Try the live Worker](https://skill-chain-mcp-flow.trantanlong2411.workers.dev/)
 - [GitHub Actions successful deployed integration run](https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow/actions/runs/41595321180)
 - [Saved machine-readable verification summary](./verified-run.json)
+- [User's real five-step exported HOLD example](./USER-PROOF.md)
 - [Custom Skill specification](../SKILL.md)
 - [Executable decision engine](../src/skill.mjs)
 - [Real Streamable HTTP MCP client](../src/mcp.mjs)

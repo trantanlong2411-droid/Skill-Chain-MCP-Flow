@@ -17,6 +17,8 @@ jobs:
       - run: npm install --no-audit --no-fund
       - name: Verify actual MCP call choreography and Skill data dependency in deterministic tests
         run: npm test
+      - name: Independently replay the user's exported Chain MCP to Skill decision
+        run: node scripts/verify-user-export.mjs
       - name: Bundle Cloudflare Worker
         run: npm run build
   composed-live-proof:

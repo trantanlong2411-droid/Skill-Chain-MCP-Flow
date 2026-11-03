@@ -1,0 +1,174 @@
+{
+  "ok": true,
+  "composition": "CHAIN_MCP_DATA_TO_SKILL_DECISION",
+  "network": "Pharos Mainnet",
+  "chainId": 1672,
+  "mcpEndpoint": "https://mcp.pharos.xyz/mcp",
+  "connection": "STREAMABLE_HTTP_MCP",
+  "genuineMcpToolCalls": [
+    "get_chain_info",
+    "get_gas_price",
+    "get_balance"
+  ],
+  "toolsUsed": 2,
+  "steps": 5,
+  "trace": [
+    {
+      "step": 1,
+      "component": "Chain MCP",
+      "phase": "initialize",
+      "status": "OK",
+      "server": "pharos-mcp-server"
+    },
+    {
+      "step": 2,
+      "component": "Chain MCP",
+      "method": "get_chain_info",
+      "status": "OK",
+      "output": {
+        "name": "Pharos",
+        "chainId": 1672,
+        "chainIdHex": "0x688",
+        "expectedChainId": 1672,
+        "chainIdMatches": true,
+        "latestBlock": "21994114",
+        "latestBlockHex": "0x14f9a82",
+        "nativeSymbol": "PROS",
+        "clientVersion": "portal/1.0.0",
+        "rpcUrl": "https://rpc.pharos.xyz"
+      }
+    },
+    {
+      "step": 3,
+      "component": "Chain MCP",
+      "method": "get_gas_price",
+      "status": "OK",
+      "output": {
+        "gasPriceWei": "10000000000",
+        "gasPriceGwei": "10",
+        "gasPriceHex": "0x2540be400",
+        "maxPriorityFeePerGasWei": "0",
+        "maxPriorityFeePerGasGwei": "0",
+        "maxPriorityFeePerGasHex": "0x0"
+      }
+    },
+    {
+      "step": 4,
+      "component": "Chain MCP",
+      "method": "get_balance",
+      "status": "OK",
+      "arguments": {
+        "address": "0x74B2c2E4E4B771F0C75dcE44f40787468E323f79",
+        "block": "21994114"
+      },
+      "output": {
+        "address": "0x74B2c2E4E4B771F0C75dcE44f40787468E323f79",
+        "balanceWei": "0",
+        "balance": "0",
+        "symbol": "PROS",
+        "balanceHex": "0x0"
+      }
+    },
+    {
+      "step": 5,
+      "component": "SkillEngine Skill",
+      "skill": "pharos-gas-readiness-gate",
+      "input": {
+        "chainId": 1672,
+        "block": "21994114",
+        "gasWei": "10000000000",
+        "balanceWei": "0",
+        "policy": {
+          "maxGasGwei": "0",
+          "maxEstimatedCostPros": "0",
+          "minimumWalletPros": "0",
+          "assumedGasUnits": 21000
+        }
+      },
+      "output": {
+        "decision": "HOLD",
+        "decidedBy": [
+          "GAS_PRICE_CEILING",
+          "COST_BUDGET"
+        ],
+        "rules": [
+          {
+            "name": "GAS_PRICE_CEILING",
+            "passed": false,
+            "observed": "10 Gwei",
+            "required": "≤ 0 Gwei"
+          },
+          {
+            "name": "COST_BUDGET",
+            "passed": false,
+            "observed": "0.00021 PROS (estimate)",
+            "required": "≤ 0 PROS"
+          },
+          {
+            "name": "WALLET_MINIMUM",
+            "passed": true,
+            "observed": "0 PROS",
+            "required": "≥ 0 PROS"
+          }
+        ],
+        "estimatedCostPros": "0.00021"
+      }
+    }
+  ],
+  "decision": {
+    "skill": "pharos-gas-readiness-gate",
+    "skillVersion": "1.0.0",
+    "decision": "HOLD",
+    "decidedBy": [
+      "GAS_PRICE_CEILING",
+      "COST_BUDGET"
+    ],
+    "explanation": "Chain MCP live readings did not satisfy the configured limits; no action is prepared.",
+    "rules": [
+      {
+        "name": "GAS_PRICE_CEILING",
+        "passed": false,
+        "observed": "10 Gwei",
+        "required": "≤ 0 Gwei"
+      },
+      {
+        "name": "COST_BUDGET",
+        "passed": false,
+        "observed": "0.00021 PROS (estimate)",
+        "required": "≤ 0 PROS"
+      },
+      {
+        "name": "WALLET_MINIMUM",
+        "passed": true,
+        "observed": "0 PROS",
+        "required": "≥ 0 PROS"
+      }
+    ],
+    "network": 1672,
+    "chainName": "Pharos",
+    "blockNumber": "21994114",
+    "address": "0x74B2c2E4E4B771F0C75dcE44f40787468E323f79",
+    "gasPriceWei": "10000000000",
+    "gasPriceGwei": "10",
+    "balanceWei": "0",
+    "balancePros": "0",
+    "assumedGasUnits": 21000,
+    "estimatedCostWei": "210000000000000",
+    "estimatedCostPros": "0.00021",
+    "observedAt": "2026-11-03T07:24:08.549Z",
+    "policy": {
+      "maxGasGwei": "0",
+      "maxEstimatedCostPros": "0",
+      "minimumWalletPros": "0",
+      "assumedGasUnits": 21000
+    },
+    "security": {
+      "readOnly": true,
+      "broadcast": false,
+      "signatureRequired": false,
+      "note": "This is a policy recommendation. Assumed gas units are not an eth_estimateGas result."
+    }
+  },
+  "execution": "READ_ONLY_ANALYSIS",
+  "transactionBroadcast": false
+}

@@ -10,6 +10,11 @@ GitHub: https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow
 
 [Verified GitHub Actions run 41595321180](https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow/actions/runs/41595321180) includes a downloadable full JSON artifact.
 
+## User-exported flow proof
+
+- [Review the user's exported five-step MCP → Skill HOLD decision](./proof/USER-PROOF.md)
+- [Full JSON](./proof/user-export-2026-11-03.json), independently replayed with the custom Skill policy in CI.
+
 ## What is actually composed?
 
 One HTTP request to the deployed Cloudflare Worker invokes one real **Pharos hosted Chain MCP** Streamable HTTP session, obtains Pharos Mainnet block and gas price and the account's on-chain PROS balance, then invokes an executable **custom SkillEngine-style skill** with those exact outputs. The skill decides ALLOW or HOLD based on configurable limits. The decision and its three source tool responses appear in a single machine-readable execution trace.
