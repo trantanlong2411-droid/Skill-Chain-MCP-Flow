@@ -1,0 +1,73 @@
+{
+  "schema": "skill-chain-mcp-flow-verified-summary-v1",
+  "checkedAtUtc": "2026-11-03",
+  "source": "Successful GitHub Actions run 41595321180 deployed-live-proof job, transcribed from logs",
+  "evidenceLink": "https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow/actions/runs/41595321180",
+  "fullArtifact": "pharos-skill-chain-mcp-live-proof",
+  "website": "https://skill-chain-mcp-flow.trantanlong2411.workers.dev/",
+  "chainMcp": {
+    "endpoint": "https://mcp.pharos.xyz/mcp",
+    "network": "Pharos Mainnet",
+    "chainId": 1672,
+    "transport": "Streamable HTTP",
+    "toolsCalled": [
+      "get_chain_info",
+      "get_gas_price",
+      "get_balance"
+    ]
+  },
+  "skill": {
+    "name": "pharos-gas-readiness-gate",
+    "implementation": "custom SkillEngine-style SKILL.md + src/skill.mjs"
+  },
+  "cases": [
+    {
+      "scenario": "relaxed",
+      "timestamp": "2026-11-03T07:17:34.7329787Z",
+      "blockNumber": "21993720",
+      "gasPriceGwei": "10",
+      "walletBalancePros": "0",
+      "result": "ALLOW",
+      "decidedBy": [
+        "ALL_RULES_PASSED"
+      ],
+      "steps": [
+        "initialize",
+        "get_chain_info",
+        "get_gas_price",
+        "get_balance",
+        "pharos-gas-readiness-gate"
+      ]
+    },
+    {
+      "scenario": "strict",
+      "timestamp": "2026-11-03T07:17:38.1992428Z",
+      "blockNumber": "21993725",
+      "gasPriceGwei": "10",
+      "walletBalancePros": "0",
+      "result": "HOLD",
+      "decidedBy": [
+        "GAS_PRICE_CEILING",
+        "COST_BUDGET"
+      ],
+      "steps": [
+        "initialize",
+        "get_chain_info",
+        "get_gas_price",
+        "get_balance",
+        "pharos-gas-readiness-gate"
+      ]
+    }
+  ],
+  "deterministicTests": {
+    "pass": 12,
+    "fail": 0
+  },
+  "transactionBroadcast": false,
+  "limits": [
+    "No on-chain transaction executed",
+    "Policy only, not wallet authorisation",
+    "Gas units estimated by assumption, not eth_estimateGas",
+    "Proof summary transcribed from CI logs; full raw source values are contained in the CI artifact"
+  ]
+}

@@ -4,6 +4,12 @@ Live site: https://skill-chain-mcp-flow.trantanlong2411.workers.dev/
 
 GitHub: https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow
 
+## Verified public proof
+
+[View real hosted Chain MCP-to-Skill execution evidence](./proof/README.md), with ALLOW and HOLD on actual Pharos Mainnet data, three named MCP tool results per flow, and 12/12 automated tests passing.
+
+[Verified GitHub Actions run 41595321180](https://github.com/trantanlong2411-droid/Skill-Chain-MCP-Flow/actions/runs/41595321180) includes a downloadable full JSON artifact.
+
 ## What is actually composed?
 
 One HTTP request to the deployed Cloudflare Worker invokes one real **Pharos hosted Chain MCP** Streamable HTTP session, obtains Pharos Mainnet block and gas price and the account's on-chain PROS balance, then invokes an executable **custom SkillEngine-style skill** with those exact outputs. The skill decides ALLOW or HOLD based on configurable limits. The decision and its three source tool responses appear in a single machine-readable execution trace.
