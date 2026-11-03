@@ -9,8 +9,8 @@ const mocked={
  get_balance:{address:request.address,balanceWei:'10000000000000000000',balance:'10',symbol:'PROS'}
 };
 test('decimal precision remains exact using bigints',()=>{
- assert.equal(units('1.23456789',9,'test'),'1234567890');
- assert.equal(units('0.000000000000000001',18,'test'),'1');
+ assert.equal(units('1.23456789',9,'test'),1234567890n);
+ assert.equal(units('0.000000000000000001',18,'test'),1n);
  assert.equal(decimal(21000000000000n),'0.000021');
 });
 test('valid policy and the official mainnet ID',()=>{
