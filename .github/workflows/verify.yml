@@ -1,0 +1,39 @@
+name: Skill + Chain MCP Flow — composition CI
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-tests-and-worker-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Verify actual MCP call choreography and Skill data dependency in deterministic tests
+        run: npm test
+      - name: Bundle Cloudflare Worker
+        run: npm run build
+  composed-live-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify one-request Chain MCP to Skill composition on public deployed Worker
+        run: node scripts/smoke-deployed.mjs
+      - name: Store machine-readable proof of real MCP tool outputs and Skill reasoning
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pharos-skill-chain-mcp-live-proof
+          path: proof/live-composed-flow.json
+          retention-days: 30
+          if-no-files-found: error
